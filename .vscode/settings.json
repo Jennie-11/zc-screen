@@ -1,0 +1,60 @@
+{
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // vscode默认启用了根据文件类型自动设置tabsize的选项
+  "editor.detectIndentation": false,
+  // 重新设定tabsize
+  "editor.tabSize": 2,
+  // #每次保存的时候自动格式化
+  "editor.formatOnSave": true,
+  // 当编辑器失去焦点时，自动保存更改了的编辑器
+  "files.autoSave": "onFocusChange",
+  // 配置文件关联 :任何 vue 后缀的文件会被认为是vue文件
+  "files.associations": {
+    "*.vue": "vue"
+  },
+  // 编辑器字体大小
+  "editor.fontSize": 16,
+  // 若设置为 true，则自动从当前 Git 仓库的默认远程仓库提取提交
+  "git.autofetch": true,
+  // 在没有暂存的更改时提交所有更改
+  "git.enableSmartCommit": true,
+  // 每次保存的时候将代码按eslint格式进行修复
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  // 启用在vscode中重命名或者移动文件夹时自动更新导入路径的功能--js
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  // 启用在vscode中重命名或者移动文件夹时自动更新导入路径的功能--ts
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  // 每次保存的时候以下文件类型将代码按eslint格式进行修复
+  "eslint.validate": ["javascript", "javascriptreact", "html", "vue"]
+}

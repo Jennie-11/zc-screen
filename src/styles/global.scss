@@ -1,0 +1,34 @@
+/** 全局SCSS变量 */
+:root {
+  --menu-text: #a4a5cb;
+  --menu-active-text: #1a7efa;
+  --select-hover-background: #f3f3f3;
+  --select-active-background: #e9e8fa;
+  --page-background: #f7f7f7;
+  --text-color: #fff;
+  --input-hover-color: #1a7efa;
+}
+
+$max-width: 1000;
+$max-height: 1000;
+$black-color: #000;
+$white-color: #fff;
+$main-color: #1a7efa;
+$border-color: #787bdf;
+$input-height: 32px;
+$header-background: linear-gradient(
+  270deg,
+  rgba(32, 36, 162, 1) 0%,
+  rgba(27, 29, 116, 1) 100%
+);
+$menu-height: 56px;
+$menu-background: var(--menu-background); // 菜单背景色
+$menu-text: var(--menu-text); // 菜单文字颜色
+$menu-active-text: var(--menu-active-text); // 菜单激活文字颜色
+$menu-hover: var(--menu-hover); // 菜单悬停背景色
+$page-background: var(--page-background);
+$Tr-unit: px;
+$text-color: var(--text-color);
+$select-hover-background: var(--select-hover-background);
+$input-hover-color: var(--input-hover-color);
+$select-active-background: var(--select-active-background);

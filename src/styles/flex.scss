@@ -1,0 +1,65 @@
+// 使用一个混合宏来简化 flex 属性的设置
+@mixin flex-properties(
+  $justify: null,
+  $align: null,
+  $direction: null,
+  $wrap: null
+) {
+  display: flex;
+  @if $justify {
+    justify-content: $justify;
+  }
+
+  @if $align {
+    align-items: $align;
+  }
+
+  @if $direction {
+    flex-direction: $direction;
+  }
+
+  @if $wrap {
+    flex-wrap: $wrap;
+  }
+}
+
+.fx {
+  display: flex;
+  &-rw {
+    flex-direction: row;
+  }
+  &-cl {
+    flex-direction: column;
+  }
+
+  &-fl {
+    flex: 1;
+  }
+
+  &-wp {
+    flex-wrap: wrap;
+  }
+
+  &-np {
+    flex-wrap: nowrap;
+  }
+
+  &-sk {
+    flex-shrink: 0;
+  }
+  &-ag-ct {
+    @include flex-properties(null, center);
+  }
+
+  &-js-ct {
+    @include flex-properties(center, null);
+  }
+
+  &-bt-ct {
+    @include flex-properties(space-between, center);
+  }
+
+  &-ct-ct {
+    @include flex-properties(center, center);
+  }
+}

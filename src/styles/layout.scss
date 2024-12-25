@@ -1,0 +1,270 @@
+.wd {
+  @for $i from 0 through $max-width {
+    &-#{$i} {
+      width: #{$i}#{$Tr-unit};
+    }
+  }
+  &-fl {
+    width: 100%;
+  }
+  &-hf {
+    width: 50%;
+  }
+}
+
+.ht {
+  @for $i from 1 through $max-height {
+    &-#{$i} {
+      height: #{$i}#{$Tr-unit};
+    }
+  }
+  @for $i from 1 through 500 {
+    &-#{$i}vh {
+      height: #{$i}vh;
+    }
+  }
+  &-fl {
+    height: 100%;
+  }
+  &-hf {
+    height: 50%;
+  }
+}
+
+.max-wd {
+  @for $i from 1 through 500 {
+    &-#{$i}vw {
+      max-width: #{$i}vw;
+    }
+  }
+  @for $i from 1 through $max-width {
+    &-#{$i}#{$Tr-unit} {
+      max-width: #{$i}#{$Tr-unit};
+    }
+  }
+}
+
+.min-wd {
+  @for $i from 1 through 500 {
+    &-#{$i}vw {
+      min-width: #{$i}vw;
+    }
+  }
+  @for $i from 1 through $max-width {
+    &-#{$i}#{$Tr-unit} {
+      min-width: #{$i}#{$Tr-unit};
+    }
+  }
+}
+
+.max-ht {
+  @for $i from 1 through 500 {
+    &-#{$i}vh {
+      max-height: #{$i}vh;
+    }
+  }
+  @for $i from 1 through $max-height {
+    &-#{$i}#{$Tr-unit} {
+      max-height: #{$i}#{$Tr-unit};
+    }
+  }
+}
+
+.min-ht {
+  @for $i from 1 through 100 {
+    &-#{$i}vh {
+      min-height: #{$i}vh;
+    }
+  }
+  @for $i from 1 through $max-height {
+    &-#{$i}#{$Tr-unit} {
+      min-height: #{$i}#{$Tr-unit};
+    }
+  }
+}
+
+.lh {
+  @for $i from 1 through $max-height {
+    &-#{$i} {
+      line-height: #{$i}#{$Tr-unit};
+    }
+  }
+}
+
+.px {
+  @for $i from 1 through 100 {
+    &-#{$i} {
+      padding-left: #{$i}#{$Tr-unit};
+      padding-right: #{$i}#{$Tr-unit};
+    }
+  }
+}
+
+.py {
+  @for $i from 1 through 100 {
+    &-#{$i} {
+      padding-top: #{$i}#{$Tr-unit};
+      padding-bottom: #{$i}#{$Tr-unit};
+    }
+  }
+}
+
+.pd {
+  @for $i from 1 through 100 {
+    &-bt-#{$i} {
+      padding-bottom: #{$i}#{$Tr-unit};
+    }
+    &-rt-#{$i} {
+      padding-right: #{$i}#{$Tr-unit};
+    }
+    &-tp-#{$i} {
+      padding-top: #{$i}#{$Tr-unit};
+    }
+    &-lf-#{$i} {
+      padding-left: #{$i}#{$Tr-unit};
+    }
+    &-#{$i} {
+      padding: #{$i}#{$Tr-unit};
+    }
+  }
+}
+
+.ft {
+  @for $i from 1 through 40 {
+    &-#{$i} {
+      font-size: #{$i}#{$Tr-unit};
+    }
+  }
+}
+
+$weightList: 400, 500, 600, 700, 800;
+.fw {
+  @each $key in $weightList {
+    &-#{$key} {
+      font-weight: #{$key};
+    }
+  }
+}
+
+.mg {
+  &-lt-at {
+    margin-left: auto;
+  }
+
+  @for $i from -100 through 100 {
+    &-lt-#{$i} {
+      margin-left: #{$i}#{$Tr-unit};
+    }
+    &-rt-#{$i} {
+      margin-right: #{$i}#{$Tr-unit};
+    }
+    &-tp-#{$i} {
+      margin-top: #{$i}#{$Tr-unit};
+    }
+    &-bt-#{$i} {
+      margin-bottom: #{$i}#{$Tr-unit};
+    }
+    &-tp--#{$i} {
+      margin-top: -#{$i}#{$Tr-unit};
+    }
+    &-bt--#{$i} {
+      margin-bottom: -#{$i}#{$Tr-unit};
+    }
+    &-#{$i} {
+      margin: #{$i}#{$Tr-unit};
+    }
+  }
+
+  &-x-at {
+    margin: 0 auto;
+  }
+  &-y-at {
+    margin: auto 0;
+  }
+  &-at {
+    margin: auto;
+  }
+}
+
+.zx {
+  @for $i from 1 through 100 {
+    &-#{$i} {
+      z-index: #{$i};
+    }
+    &--#{$i} {
+      z-index: -#{$i};
+    }
+  }
+}
+
+.tx {
+  &-ct {
+    text-align: center;
+  }
+  &-nw {
+    white-space: nowrap;
+  }
+  &-lf {
+    text-align: left;
+  }
+  &-rt {
+    text-align: right;
+  }
+}
+
+// 定义定位相关的类
+.ps {
+  // 定义定位类型的类
+  $positions: (
+    rl: relative,
+    fx: fixed,
+    as: absolute,
+  );
+
+  @each $key, $value in $positions {
+    &-#{$key} {
+      position: $value;
+    }
+  }
+
+  @for $i from 1 through $max-height {
+    &-tp--#{$i} {
+      top: -#{$i}#{$Tr-unit};
+    }
+    &-lt--#{$i} {
+      left: -#{$i}#{$Tr-unit};
+    }
+    &-rt--#{$i} {
+      right: -#{$i}#{$Tr-unit};
+    }
+    &-bt--#{$i} {
+      bottom: -#{$i}#{$Tr-unit};
+    }
+    &-lt-#{$i} {
+      left: #{$i}#{$Tr-unit};
+    }
+    &-rt-#{$i} {
+      right: #{$i}#{$Tr-unit};
+    }
+    &-bt-#{$i} {
+      bottom: #{$i}#{$Tr-unit};
+    }
+    &-tp-#{$i} {
+      top: #{$i}#{$Tr-unit};
+    }
+  }
+
+  // 定义底部对齐类
+  &-bt-0 {
+    bottom: 0;
+  }
+  &-tp-0 {
+    top: 0;
+  }
+  &-lt-0 {
+    left: 0;
+  }
+  &-rt-0 {
+    right: 0;
+  }
+}

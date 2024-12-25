@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+@import "./normalize.scss";
+@import "./mixin.scss";
+@import "./effect.scss";
+@import "./layout.scss";
+@import "./flex.scss";
+@import "./fonts.scss";
+@import "./common.scss";
+@import "./element-variables.scss";
+
+@include scrollBar;
