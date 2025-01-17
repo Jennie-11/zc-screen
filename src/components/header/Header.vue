@@ -1,5 +1,5 @@
 <template>
-  <div class="ht-68 fx-bt-ct fx-sk wd-fl bg-e2a bd-ff-bt">
+  <div class="ht-68 fx-bt-ct fx-sk wd-fl bg-e2a bd-fff-bt">
     <img class="head-bg" src="@/assets/login/head_name.png" />
     <Options v-if="isNeedOption" />
     <Exit v-bind="$attrs" />

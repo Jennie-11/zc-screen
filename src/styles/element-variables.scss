@@ -18,6 +18,13 @@ $--color-info: #999999;
   font-size: 16px;
 }
 .el-tabs {
+  .el-tabs__header {
+    margin: 0;
+    border-bottom: none;
+    .el-tabs__nav {
+      border: none;
+    }
+  }
   .el-tabs__active-bar {
     background-color: $main-color;
   }

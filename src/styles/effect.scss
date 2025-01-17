@@ -26,9 +26,17 @@
   }
 }
 
+$fontColors: (
+  3ba: #030b1a,
+  bf0: #00bf60,
+  f3d: #ff383d,
+);
+
 .cr {
-  &-pm {
-    color: $main-color;
+  @each $key, $value in $fontColors {
+    &-#{$key} {
+      color: $value;
+    }
   }
 }
 
@@ -37,6 +45,7 @@ $backgroundColors: (
   fff: #ffffff,
   e2a: #eef2fa,
   b3e: #bee3fe,
+  ffc: #f5f7fc,
 );
 
 .bg {
@@ -71,10 +80,10 @@ $backgroundColors: (
 
 $borderColors: (
   77f: #787bdf,
-  e7: #e7e7e7,
-  pm: #439cfb,
-  dc: #dcdcdc,
-  ff: #ffffff,
+  49b: #439cfb,
+  fff: #ffffff,
+  17a: #1a7efa,
+  dd5: #dcdfe5,
 );
 
 .bd {
@@ -145,5 +154,15 @@ $borderColors: (
   }
   &-y-sr:hover {
     overflow-y: auto;
+  }
+}
+
+// 字体类型
+.ff {
+  &-tx {
+    font-family: "TenXun";
+  }
+  &-pz {
+    font-family: "PanMen";
   }
 }

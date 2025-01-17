@@ -110,7 +110,7 @@
 }
 
 .pd {
-  @for $i from 1 through 100 {
+  @for $i from 0 through 100 {
     &-bt-#{$i} {
       padding-bottom: #{$i}#{$Tr-unit};
     }
@@ -151,7 +151,7 @@ $weightList: 400, 500, 600, 700, 800;
     margin-left: auto;
   }
 
-  @for $i from -100 through 100 {
+  @for $i from 0 through 100 {
     &-lt-#{$i} {
       margin-left: #{$i}#{$Tr-unit};
     }

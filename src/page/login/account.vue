@@ -1,5 +1,5 @@
 <template>
-  <div class="account-box pd-lf-112 fx-fl wd-0 bd-ff-4 bd-rd-8">
+  <div class="account-box pd-lf-112 fx-fl wd-0 bd-fff-4 bd-rd-8">
     <div class="login-title cr-bk-9 ft-40 lh-40 tx-ct">账号密码登录</div>
     <div class="ht-1 bg-b3e mg-tp-44 mg-bt-52"></div>
     <el-form :model="loginForm" :rules="rules" ref="ruleForm">
@@ -29,7 +29,7 @@
       </el-form-item>
     </el-form>
     <div
-      class="blue-btn fx-ct-ct ft-24 cr-wt-10 bg-17a bd-pm-1 bd-rd-8 ht-64 mg-tp-72 cs-pt"
+      class="blue-btn fx-ct-ct ft-24 cr-wt-10 bg-17a bd-49b-1 bd-rd-8 ht-64 mg-tp-72 cs-pt"
       @click="loginHandle"
     >
       登录
