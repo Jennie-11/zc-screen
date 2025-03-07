@@ -2,6 +2,7 @@
   <div class="tabs-box pd-24 bd-dd5-bt fx-sk">
     <el-tabs
       v-model="activeMenu"
+      @tab-click="tabsChange"
       type="card"
       :class="{ 'un-scroll': tagList.length < 8 }"
     >
@@ -17,66 +18,15 @@
 <script>
 export default {
   name: "TabsBox",
+  props: ["tagList"],
   data: () => ({
-    tagList: [
-      {
-        name: "1",
-        label: "温度传感器-01",
-        text: "25.48℃",
-      },
-      {
-        name: "2",
-        label: "温度传感器-02",
-        text: "51.99℃",
-      },
-      {
-        name: "3",
-        label: "温度传感器-03",
-        text: "51.99℃",
-      },
-      {
-        name: "4",
-        label: "温度传感器-04",
-        text: "51.99℃",
-      },
-      {
-        name: "5",
-        label: "温度传感器-05",
-        text: "51.99℃",
-      },
-      {
-        name: "6",
-        label: "温度传感器-06",
-        text: "51.99℃",
-      },
-      {
-        name: "7",
-        label: "温度传感器-07",
-        text: "51.99℃",
-      },
-      {
-        name: "8",
-        label: "温度传感器-08",
-        text: "51.99℃",
-      },
-      {
-        name: "9",
-        label: "温度传感器-09",
-        text: "51.99℃",
-      },
-      {
-        name: "10",
-        label: "温度传感器-10",
-        text: "51.99℃",
-      },
-      {
-        name: "11",
-        label: "温度传感器-11",
-        text: "51.99℃",
-      },
-    ],
-    activeMenu: "1",
+    activeMenu: "temp1",
   }),
+  methods: {
+    tabsChange(val) {
+      this.$emit("tabsChange", val);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

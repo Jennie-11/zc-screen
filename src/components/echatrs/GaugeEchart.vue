@@ -9,17 +9,21 @@ export default {
   name: "EchartBox",
   data: () => ({
     echartObject: null,
+
+    chartDom: null,
+    containerHeight: 1,
+    baseHeight: 612,
   }),
   methods: {
     initChartHandle() {
-      var chartDom = document.getElementById("gaugeChart");
-      this.echartObject = echarts.init(chartDom);
+      this.echartObject = echarts.init(this.chartDom);
+      const containerHeight = this.containerHeight;
       var option;
       option = {
         series: [
           {
             type: "gauge",
-            center: ["50%", "50%"],
+            center: ["50%", "54%"],
             radius: "70%",
             startAngle: 240,
             endAngle: -60,
@@ -28,7 +32,7 @@ export default {
             splitNumber: 10,
             progress: {
               show: true,
-              width: 30,
+              width: 30 * containerHeight,
               itemStyle: {
                 color: "#00BF60",
               },
@@ -39,30 +43,30 @@ export default {
             axisLine: {
               color: "#dfebfb",
               lineStyle: {
-                width: 30,
+                width: 30 * containerHeight,
                 color: [[1, "#dfebfb"]],
               },
             },
             axisTick: {
-              distance: -45,
+              distance: -45 * containerHeight,
               splitNumber: 5,
               lineStyle: {
                 color: "#dcdfe5",
-                width: 2,
+                width: 2 * containerHeight,
               },
             },
             splitLine: {
-              distance: -52,
-              length: 14,
+              distance: -52 * containerHeight,
+              length: 14 * containerHeight,
               lineStyle: {
-                width: 3,
+                width: 3 * containerHeight,
                 color: "#dce0e5",
               },
             },
             axisLabel: {
-              distance: -32,
+              distance: -32 * containerHeight,
               color: "#9498a1",
-              fontSize: 32,
+              fontSize: 32 * containerHeight,
               fontFamily: "TenXun",
             },
             anchor: {
@@ -76,8 +80,8 @@ export default {
               width: "100%",
               borderRadius: 8,
               offsetCenter: [0, 0],
-              fontSize: 48,
-              lineHeight: 48,
+              fontSize: 48 * containerHeight,
+              lineHeight: 48 * containerHeight,
               fontFamily: "TenXun",
               formatter: function (value) {
                 return `{value|${value}°C}\n{stateName|数值正常}\n{tip|温度传感器-01}`;
@@ -85,18 +89,18 @@ export default {
               rich: {
                 value: {
                   color: "#00bf60",
-                  fontSize: 48,
+                  fontSize: 48 * containerHeight,
                   fontFamily: "TenXun",
-                  lineHeight: 60,
+                  lineHeight: 60 * containerHeight,
                 },
                 stateName: {
                   color: "#00bf60",
-                  fontSize: 32,
+                  fontSize: 32 * containerHeight,
                   fontFamily: "TenXun",
                 },
                 tip: {
                   color: "#030B1A",
-                  fontSize: 23,
+                  fontSize: 23 * containerHeight,
                 },
               },
             },
@@ -110,6 +114,7 @@ export default {
           {
             type: "gauge",
             radius: "55%",
+            center: ["50%", "54%"],
             min: 0,
             max: 100,
             startAngle: 360,
@@ -123,10 +128,10 @@ export default {
             },
             axisTick: {
               distance: 0,
-              length: 10,
+              length: 10 * containerHeight,
               lineStyle: {
                 color: "#dcdfe5",
-                width: 4,
+                width: 4 * containerHeight,
               },
             },
             axisLabel: {
@@ -146,12 +151,20 @@ export default {
       };
       this.echartObject.setOption(option);
     },
+    clientHeightFun() {
+      this.containerHeight = this.chartDom.offsetHeight / this.baseHeight;
+    },
   },
   mounted() {
+    this.chartDom = document.getElementById("gaugeChart");
+
     window.addEventListener("resize", () => {
+      this.clientHeightFun();
+      this.initChartHandle();
       this.echartObject && this.echartObject.resize();
     });
     this.$nextTick(() => {
+      this.clientHeightFun();
       this.initChartHandle();
     });
   },

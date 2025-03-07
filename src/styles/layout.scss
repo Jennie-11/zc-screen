@@ -130,7 +130,7 @@
 }
 
 .ft {
-  @for $i from 1 through 40 {
+  @for $i from 1 through 50 {
     &-#{$i} {
       font-size: #{$i}#{$Tr-unit};
     }

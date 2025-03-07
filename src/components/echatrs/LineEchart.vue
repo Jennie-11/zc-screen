@@ -5,8 +5,9 @@
 </template>
 <script>
 import * as echarts from "echarts";
+
 export default {
-  name: "BrokenLine",
+  name: "LineEcharts",
   data: () => ({
     echartObject: null,
     chartDom: null,
@@ -19,16 +20,14 @@ export default {
       var option;
       option = {
         grid: {
-          left: "1%",
+          left: "5%",
           right: "3%",
           bottom: "3%",
           containLabel: true,
         },
-        title: {
-          subtext: "单位：%RH",
-        },
+
         legend: {
-          data: ["Test"],
+          data: ["火焰传感器"],
           type: "plain",
           itemHeight: 0,
           itemWidth: 12,
@@ -42,18 +41,7 @@ export default {
             color: "#e0e6f1",
           },
         },
-        areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            {
-              offset: 0,
-              color: "rgba(26, 126, 250, 0.6)",
-            },
-            {
-              offset: 1,
-              color: "rgba(26, 126, 250, 0)",
-            },
-          ]),
-        },
+
         xAxis: {
           type: "category",
           boundaryGap: false,
@@ -68,13 +56,16 @@ export default {
         },
         yAxis: {
           type: "value",
+          max: 8,
           // name: "y",
           axisLabel: {
+            show: false,
             fontSize: 18 * this.containerHeight, // 全局字号
           },
           splitLine: {
             show: false,
           },
+          // data: [1, 8, 6, 8],
         },
         tooltip: {
           trigger: "item",
@@ -82,43 +73,51 @@ export default {
 
         series: [
           {
-            name: "Test",
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
-            type: "line",
-            symbol: "circle",
-            areaStyle: {},
-            color: "#1A7EFA",
+            name: "火焰传感器",
+            data: [5, 5, 8, 8, 5, 5, 8],
             markLine: {
               emphasis: {
                 disabled: true,
               },
               data: [
                 {
-                  // name: "温度上线",
-                  yAxis: 800,
+                  name: "异常",
+                  yAxis: 5,
                   label: {
                     formatter: "{b}",
-                    position: "insideMiddle",
+                    position: "start",
+                    color: "#FF383D",
+                    fontSize: 16 * this.containerHeight,
+                  },
+                  z: 1,
+                  lineStyle: {
+                    color: "#FF383D",
+                    width: 2,
                   },
                 },
                 {
-                  // name: "温度下线",
-                  yAxis: 600,
+                  name: "正常",
+                  yAxis: 8,
                   label: {
                     formatter: "{b}",
-                    position: "insideMiddle",
+                    position: "start",
+                    color: "#00BF60",
+                    fontSize: 16 * this.containerHeight,
+                  },
+                  z: 1,
+                  lineStyle: {
+                    color: "#00BF60",
+                    width: 2,
                   },
                 },
               ],
-              lineStyle: {
-                color: "#FF383D",
-                width: 2,
-              },
+
               symbol: "none",
-              label: {
-                distance: [20, 8],
-              },
             },
+            type: "line",
+            symbol: "none",
+            z: 5,
+            color: "#1A7EFA",
           },
         ],
       };

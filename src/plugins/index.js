@@ -3,3 +3,4 @@ import "@/styles/index.scss";
 import "./element";
 import "./permission";
 import "./loading";
+import "./others";
