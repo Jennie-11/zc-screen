@@ -34,7 +34,8 @@ module.exports = defineConfig({
     proxy: {
       "/api": {
         // target: "http://10.0.48.7",
-        target: "https://hrdev.trio-gz.com/api", //映射
+        // target: "https://hrdev.trio-gz.com/api", //映射
+        target: "http://192.168.100.94:18888/api", //94测试环境
         ws: true,
         pathRewrite: {
           "^/api": "/",

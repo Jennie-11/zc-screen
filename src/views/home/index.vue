@@ -17,6 +17,7 @@
 <script>
 import WorkShopOption from "../components/WorkShopOption.vue";
 import OptionInfo from "../components/OptionInfo.vue";
+import { getShopList } from "@/api/workshop";
 export default {
   name: "HomePage",
   components: {
@@ -288,7 +289,9 @@ export default {
     this.tagProps = this.optionList[0];
     this.tabsChange("temp1");
   },
-  mounted() {},
+  mounted() {
+    this.getShopListHandle();
+  },
   methods: {
     tabsChange(val) {
       this.dataProps = this.$findByProperty(this.tagProps.tagList, "name", val);
@@ -298,6 +301,10 @@ export default {
       this.currentActiveId = val.id;
       this.tagProps = this.$findByProperty(this.optionList, "id", val.id);
       this.tabsChange(this.tagProps.tagList[0].name);
+    },
+    async getShopListHandle() {
+      const { data: res } = await getShopList("4D5F");
+      console.log(res, ">>>>>>>>>>>>>>>>>");
     },
   },
 };
