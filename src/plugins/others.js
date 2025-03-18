@@ -1,11 +1,15 @@
 import Vue from "vue";
 import { validateData } from "@/utils/validate";
+import { format } from "@/utils/formatTime";
+
 // import { enumApiPlugin } from "@/utils/enumFetch";
 // import { enumFetchApi } from "@/utils/enumApiFetch";
 import { findByProperty } from "@/utils/util";
 // import { exportHandle } from "@/utils/export.js";
 // import "@/utils/browserPatch";
 Vue.prototype.$validateData = validateData;
+Date.prototype.format = format;
+
 Vue.prototype.$findByProperty = findByProperty;
 // Vue.prototype.$exportHandle = exportHandle;
 // Vue.use(enumApiPlugin);

@@ -2,7 +2,7 @@
   <div
     class="option-item ps-rl ht-88 fx-fl fx-sk fx fx-ag-ct bd-rd-4 bd-fff-1 bg-ffc mg-rt-24 cs-pt of-hd ts-al"
     :class="[
-      { 'bd-17a-1': optionData.id == activeId },
+      { 'bd-17a-1 cheeked': optionData.id == activeId },
       { abnormal: optionData.status == 2 },
     ]"
     @click="changeOptionHandle"
@@ -47,6 +47,7 @@ export default {
 <style lang="scss" scoped>
 .option-item {
   padding: 16px 24px;
+
   &:last-child {
     margin-right: 0;
   }
@@ -63,6 +64,9 @@ export default {
       rgba(255, 255, 255, 0) 80%
     );
   }
+}
+.cheeked {
+  box-shadow: 0px 0px 16px 0px rgba(69, 128, 232, 0.25);
 }
 .abnormal {
   &::after {

@@ -5,21 +5,27 @@
 </template>
 <script>
 import * as echarts from "echarts";
+
 export default {
   name: "EchartBox",
+  props: ["unit", "dataProps"],
+  inheritAttrs: false,
   data: () => ({
     echartObject: null,
 
     chartDom: null,
     containerHeight: 1,
     baseHeight: 612,
+    option: {},
   }),
+
   methods: {
     initChartHandle() {
       this.echartObject = echarts.init(this.chartDom);
       const containerHeight = this.containerHeight;
-      var option;
-      option = {
+
+      let that = this;
+      this.option = {
         series: [
           {
             type: "gauge",
@@ -30,6 +36,11 @@ export default {
             min: 0,
             max: 100,
             splitNumber: 10,
+            data: [
+              {
+                value: this.dataProps.value * 1,
+              },
+            ],
             progress: {
               show: true,
               width: 30 * containerHeight,
@@ -84,7 +95,7 @@ export default {
               lineHeight: 48 * containerHeight,
               fontFamily: "TenXun",
               formatter: function (value) {
-                return `{value|${value}°C}\n{stateName|数值正常}\n{tip|温度传感器-01}`;
+                return `{value|${value}${that.unit}}\n{stateName|数值正常}\n{tip|温度传感器-01}`;
               },
               rich: {
                 value: {
@@ -104,16 +115,10 @@ export default {
                 },
               },
             },
-
-            data: [
-              {
-                value: 26,
-              },
-            ],
           },
           {
             type: "gauge",
-            radius: "55%",
+            radius: "58%",
             center: ["50%", "54%"],
             min: 0,
             max: 100,
@@ -128,10 +133,10 @@ export default {
             },
             axisTick: {
               distance: 0,
-              length: 10 * containerHeight,
+              length: 12 * containerHeight,
               lineStyle: {
                 color: "#dcdfe5",
-                width: 4 * containerHeight,
+                width: 8 * containerHeight,
               },
             },
             axisLabel: {
@@ -149,7 +154,7 @@ export default {
           },
         ],
       };
-      this.echartObject.setOption(option);
+      this.echartObject.setOption(this.option);
     },
     clientHeightFun() {
       this.containerHeight = this.chartDom.offsetHeight / this.baseHeight;
@@ -167,6 +172,15 @@ export default {
       this.clientHeightFun();
       this.initChartHandle();
     });
+  },
+  watch: {
+    dataProps: {
+      handler(val) {
+        this.option.series[0].data[0].value = val.value;
+        // this.option.
+        this.echartObject.setOption(this.option);
+      },
+    },
   },
 };
 </script>

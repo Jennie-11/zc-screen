@@ -88,7 +88,7 @@ $borderColors: (
 
 .bd {
   @each $key, $value in $borderColors {
-    @for $i from 1 through 50 {
+    @for $i from 1 through 20 {
       &-#{$key}-#{$i} {
         border: #{$i}#{$Tr-unit} solid $value;
       }

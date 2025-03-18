@@ -16,6 +16,7 @@
 <script>
 export default {
   name: "ExitBox",
+
   props: {
     isNeedExit: {
       type: Boolean,

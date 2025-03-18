@@ -41,11 +41,28 @@ export default {
             color: "#e0e6f1",
           },
         },
-
+        // dataZoom: {
+        //   // show: false,
+        // },
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: [
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat",
+            "Sun",
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat",
+            "Sun",
+          ],
           axisLabel: {
             type: "time",
             onZero: false,
@@ -68,13 +85,13 @@ export default {
           // data: [1, 8, 6, 8],
         },
         tooltip: {
-          trigger: "item",
+          trigger: "axis",
         },
 
         series: [
           {
             name: "火焰传感器",
-            data: [5, 5, 8, 8, 5, 5, 8],
+            data: [5, 5, 8, 8, 5, 5, 8, 5, 5, 8, 8, 5, 5, 8],
             markLine: {
               emphasis: {
                 disabled: true,

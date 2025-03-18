@@ -26,7 +26,6 @@
 </template>
 <script>
 import Topic from "@/components/topic/Topic.vue";
-// import GaugeEchart from "@/components/echatrs/GaugeEchart.vue";
 import LineEchart from "@/components/echatrs/LineEchart.vue";
 export default {
   props: ["dataProps"],

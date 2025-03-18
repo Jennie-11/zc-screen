@@ -13,6 +13,27 @@ $--color-info: #999999;
     }
   }
 }
+.el-radio-group {
+  margin-left: 16px;
+  .el-radio {
+    display: flex;
+    margin-right: 18px;
+    align-items: center;
+  }
+}
+.el-radio__input.is-checked .el-radio__inner::after {
+  width: 8px;
+  height: 8px;
+  background-color: #1a7efa;
+}
+
+.el-radio__input .el-radio__inner {
+  width: 16px;
+  height: 16px !important;
+  background: transparent !important;
+  border: 1px solid #1a7efa;
+}
+
 .el-form-item__error {
   color: #ff383d;
   font-size: 16px;
@@ -342,14 +363,19 @@ $--color-info: #999999;
   margin-right: 24px;
   &.is-checked {
     .el-radio__label {
-      color: $main-color;
+      color: #030b1a;
+      opacity: 0.8;
     }
+  }
+  .el-radio__label {
+    opacity: 0.4;
   }
 }
 .el-radio__input {
   line-height: inherit;
   .el-radio__inner {
     height: 14px;
+    border-color: rgba(#000, 0.4);
   }
   .el-radio__inner:hover {
     border-color: $main-color;

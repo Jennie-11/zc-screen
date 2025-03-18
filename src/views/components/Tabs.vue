@@ -1,15 +1,21 @@
 <template>
   <div class="tabs-box pd-24 bd-dd5-bt fx-sk">
     <el-tabs
-      v-model="activeMenu"
+      v-model="activeName"
       @tab-click="tabsChange"
       type="card"
-      :class="{ 'un-scroll': tagList.length < 8 }"
+      :class="{ 'un-scroll': tagProps.tagList.length < 8 }"
     >
-      <el-tab-pane :key="item.value" v-for="item in tagList" :name="item.name">
+      <el-tab-pane
+        :key="item.name"
+        v-for="item in tagProps.tagList"
+        :name="item.name"
+      >
         <div slot="label">
           <div class="ft-20 lh-20 cr-3ba mg-bt-8">{{ item.label }}</div>
-          <div class="tab-text lh-20 ft-20 cr-bf0">{{ item.text }}</div>
+          <div class="tab-text lh-20 ft-20 cr-bf0">
+            {{ item.value }}{{ tagProps.unit }}
+          </div>
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -18,13 +24,24 @@
 <script>
 export default {
   name: "TabsBox",
-  props: ["tagList"],
+  props: ["tagProps"],
   data: () => ({
-    activeMenu: "temp1",
+    activeName: "",
   }),
+  computed: {},
+  mounted() {},
+  watch: {
+    "tagProps.tagList": {
+      handler(val) {
+        this.activeName = val[0].name;
+      },
+      immediate: true,
+    },
+  },
+
   methods: {
     tabsChange(val) {
-      this.$emit("tabsChange", val);
+      this.$emit("tabsChange", val.name);
     },
   },
 };

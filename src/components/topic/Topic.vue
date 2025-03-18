@@ -4,6 +4,7 @@
     <div class="title ft-24 cr-3ba ff-pz fx-sk mg-lt-12 mg-rt-12">
       {{ title }}
     </div>
+    <slot name="titleSolt" :value="11"> </slot>
     <!-- <div class="address">广州</div> -->
   </div>
 </template>
@@ -20,6 +21,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .topic-box {
+  position: relative;
   background: linear-gradient(
     90deg,
     rgba(26, 126, 250, 0.25) 0%,

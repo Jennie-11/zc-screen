@@ -7,20 +7,21 @@
 import * as echarts from "echarts";
 export default {
   name: "BrokenLine",
+  props: ["echatrsData"],
+  inheritAttrs: false,
   data: () => ({
-    echartObject: null,
+    myEcharts: null,
     chartDom: null,
     containerHeight: 1,
     baseHeight: 612,
   }),
   methods: {
     initChartHandle() {
-      this.echartObject = echarts.init(this.chartDom);
       var option;
       option = {
         grid: {
           left: "1%",
-          right: "3%",
+          right: "1%",
           bottom: "3%",
           containLabel: true,
         },
@@ -46,7 +47,7 @@ export default {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
-              color: "rgba(26, 126, 250, 0.6)",
+              color: "rgba(26, 126, 250, 0.1)",
             },
             {
               offset: 1,
@@ -57,7 +58,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: this.echatrsData.xData,
           axisLabel: {
             type: "time",
             onZero: false,
@@ -68,7 +69,6 @@ export default {
         },
         yAxis: {
           type: "value",
-          // name: "y",
           axisLabel: {
             fontSize: 18 * this.containerHeight, // 全局字号
           },
@@ -77,15 +77,24 @@ export default {
           },
         },
         tooltip: {
-          trigger: "item",
+          trigger: "axis",
         },
-
+        dataZoom: [
+          {
+            type: "inside",
+            show: false,
+            realtime: true,
+            startValue: 2,
+            endValue: 100,
+            xAxisIndex: [0, 1],
+          },
+        ],
         series: [
           {
             name: "Test",
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            data: this.echatrsData.yData,
             type: "line",
-            symbol: "circle",
+            symbol: "none",
             areaStyle: {},
             color: "#1A7EFA",
             markLine: {
@@ -122,19 +131,34 @@ export default {
           },
         ],
       };
-      this.echartObject.setOption(option);
+      this.myEcharts.setOption(option);
     },
     clientHeightFun() {
       this.containerHeight = this.chartDom.offsetHeight / this.baseHeight;
     },
   },
+  watch: {
+    echatrsData: {
+      handler() {
+        console.log("echartData");
+
+        this.initChartHandle();
+      },
+      deep: true,
+    },
+  },
   mounted() {
     this.chartDom = document.getElementById("brokenLineChart");
-    window.addEventListener("resize", () => {
+    this.myEcharts = echarts.init(this.chartDom);
+
+    window.addEventListener("resize", (event) => {
+      console.log(event, "event");
+
       this.clientHeightFun();
       this.initChartHandle();
-      this.echartObject && this.echartObject.resize();
+      this.myEcharts && this.myEcharts.resize();
     });
+
     this.$nextTick(() => {
       this.clientHeightFun();
       this.initChartHandle();
@@ -147,8 +171,18 @@ export default {
   width: 100%;
   height: 100%;
 }
-#brokenLineChart {
+::v-deep #brokenLineChart {
   width: 100%;
   height: 100%;
+  & > div:first-child {
+    height: 100% !important;
+  }
+  canvas {
+    height: 100% !important;
+  }
 }
+// #brokenLineChart > div:first-child {
+//   // height: 100% !important;
+
+// }
 </style>
