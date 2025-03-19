@@ -26,45 +26,27 @@ export default {
   },
   data() {
     return {
-      currentActiveId: "temperature",
-      optionList1: [
-        {
-          id: "123",
-          label: "车间温度",
-          status: 1,
-          statusName: "全部正常",
-          type: "temp",
-          unit: "°C",
-          tagList: [
-            {
-              id: "345",
-              name: "temp1",
-              label: "温度传感器-01",
-              value: "25.48",
-              status: 1,
-            },
-          ],
-        },
-      ],
+      currentActiveId: 0,
+
       optionList: [
         {
           id: "temperature",
-          label: "车间温度",
+          hardwareTypeStr: "车间温度",
           status: 1,
-          statusName: "全部正常",
+          abnormalNum: "0",
           type: "temp",
           unit: "°C",
           tagList: [
             {
               name: "temp1",
-              label: "温度传感器-01",
+              hardwareTypeStr: "温度传感器-01",
               value: "25.48",
               type: "temp",
               status: 1,
             },
             {
               name: "temp2",
-              label: "温度传感器-02",
+              hardwareTypeStr: "温度传感器-02",
               value: "51.99",
               type: "temp",
               status: 1,
@@ -72,49 +54,49 @@ export default {
 
             {
               name: "5",
-              label: "温度传感器-05",
+              hardwareTypeStr: "温度传感器-05",
               value: "51.99",
               type: "temp",
               status: 2,
             },
             {
               name: "6",
-              label: "温度传感器-06",
+              hardwareTypeStr: "温度传感器-06",
               value: "51.99",
               type: "temp",
               status: 1,
             },
             {
               name: "7",
-              label: "温度传感器-07",
+              hardwareTypeStr: "温度传感器-07",
               value: "51.99",
               type: "temp",
               status: 2,
             },
             {
               name: "8",
-              label: "温度传感器-08",
+              hardwareTypeStr: "温度传感器-08",
               value: "51.99",
               type: "temp",
               status: 1,
             },
             {
               name: "9",
-              label: "温度传感器-09",
+              hardwareTypeStr: "温度传感器-09",
               value: "51.99",
               type: "temp",
               status: 1,
             },
             {
               name: "10",
-              label: "温度传感器-10",
+              hardwareTypeStr: "温度传感器-10",
               value: "51.99",
               type: "temp",
               status: 1,
             },
             {
               name: "11",
-              label: "温度传感器-11",
+              hardwareTypeStr: "温度传感器-11",
               value: "51.99",
               type: "temp",
               status: 2,
@@ -123,22 +105,22 @@ export default {
         },
         {
           id: "humidity",
-          label: "车间湿度",
+          hardwareTypeStr: "车间湿度",
           status: 1,
-          statusName: "全部正常",
+          abnormalNum: "0",
           unit: "%RH",
           type: "humidity",
           tagList: [
             {
               name: "humidity1",
-              label: "湿度传感器-01",
+              hardwareTypeStr: "湿度传感器-01",
               value: "65.48",
               type: "humidity",
               status: 1,
             },
             {
               name: "humidity2",
-              label: "湿度传感器-02",
+              hardwareTypeStr: "湿度传感器-02",
               value: "51.99",
               type: "humidity",
               status: 1,
@@ -147,22 +129,22 @@ export default {
         },
         {
           id: "oxygen",
-          label: "车间含氧量",
+          hardwareTypeStr: "车间含氧量",
           status: 2,
-          statusName: "3个异常",
+          abnormalNum: "3",
           unit: "%",
           type: "oxygen",
           tagList: [
             {
               name: "oxygen1",
-              label: "氧气传感器-01",
+              hardwareTypeStr: "氧气传感器-01",
               value: "65.48",
               type: "oxygen",
               status: 1,
             },
             {
               name: "oxygen2",
-              label: "氧气传感器-02",
+              hardwareTypeStr: "氧气传感器-02",
               value: "51.99",
               type: "oxygen",
               status: 1,
@@ -171,22 +153,22 @@ export default {
         },
         {
           id: "hydrogen",
-          label: "车间氢气",
+          hardwareTypeStr: "车间氢气",
           status: 2,
-          statusName: "3个异常",
+          abnormalNum: "3",
           unit: "%",
           type: "hydrogen",
           tagList: [
             {
               name: "hydrogen1",
-              label: "氢气传感器-01",
+              hardwareTypeStr: "氢气传感器-01",
               value: "65.48",
               type: "hydrogen",
               status: 1,
             },
             {
               name: "hydrogen2",
-              label: "氢气传感器-02",
+              hardwareTypeStr: "氢气传感器-02",
               value: "51.99",
               type: "hydrogen",
               status: 1,
@@ -195,22 +177,22 @@ export default {
         },
         {
           id: "flame",
-          label: "车间火焰",
+          hardwareTypeStr: "车间火焰",
           status: 2,
-          statusName: "1个异常",
+          abnormalNum: "1",
           unit: undefined,
           type: "flame",
           tagList: [
             {
               name: "flame1",
-              label: "火焰传感器-01",
+              hardwareTypeStr: "火焰传感器-01",
               value: "正常",
               type: "flame",
               status: 1,
             },
             {
               name: "4",
-              label: "火焰传感器-02",
+              hardwareTypeStr: "火焰传感器-02",
               value: "异常",
               type: "flame",
               status: 2,
@@ -219,22 +201,22 @@ export default {
         },
         {
           id: "dust",
-          label: "车间粉尘",
+          hardwareTypeStr: "车间粉尘",
           status: 1,
-          statusName: "全部正常",
+          abnormalNum: "0",
           unit: "mg/m³",
           type: "dust",
           tagList: [
             {
               name: "dust1",
-              label: "氢气传感器-01",
+              hardwareTypeStr: "氢气传感器-01",
               value: "65.48",
               type: "dust",
               status: 1,
             },
             {
               name: "dust2",
-              label: "氢气传感器-02",
+              hardwareTypeStr: "氢气传感器-02",
               value: "51.99",
               type: "dust",
               status: 1,
@@ -297,14 +279,19 @@ export default {
       this.dataProps = this.$findByProperty(this.tagProps.tagList, "name", val);
     },
     changeOptionHandle(val) {
-      if (this.currentActiveId == val.id) return;
-      this.currentActiveId = val.id;
-      this.tagProps = this.$findByProperty(this.optionList, "id", val.id);
+      if (this.currentActiveId == val.hardwareType) return;
+      this.currentActiveId = val.hardwareType;
+      this.tagProps = this.$findByProperty(
+        this.optionList,
+        "hardwareType",
+        val.hardwareType
+      );
       this.tabsChange(this.tagProps.tagList[0].name);
     },
     async getShopListHandle() {
-      const { data: res } = await getShopList("4D5F");
-      console.log(res, ">>>>>>>>>>>>>>>>>");
+      const { data } = await getShopList("4D5F");
+      this.optionList = data.data;
+      console.log(data, ">>>>>>>>>>>>>>>>>");
     },
   },
 };

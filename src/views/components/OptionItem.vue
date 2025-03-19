@@ -2,19 +2,25 @@
   <div
     class="option-item ps-rl ht-88 fx-fl fx-sk fx fx-ag-ct bd-rd-4 bd-fff-1 bg-ffc mg-rt-24 cs-pt of-hd ts-al"
     :class="[
-      { 'bd-17a-1 cheeked': optionData.id == activeId },
-      { abnormal: optionData.status == 2 },
+      { 'bd-17a-1 cheeked': optionData.hardwareType == activeId },
+      { abnormal: optionData.abnormalNum > 0 },
     ]"
     @click="changeOptionHandle"
   >
     <img class="ic-56 mg-rt-24" :src="getMenuImage()" />
     <div>
-      <p class="ft-20 lh-20 cr-3ba mg-bt-12">{{ optionData.label }}</p>
+      <p class="ft-20 lh-20 cr-3ba mg-bt-12">
+        {{ optionData.hardwareTypeStr }}
+      </p>
       <p
         class="ft-24 lh-24 cr-bf0 fw-600"
-        :class="{ 'cr-f3d': optionData.status == 2 }"
+        :class="{ 'cr-f3d': optionData.abnormalNum > 0 }"
       >
-        {{ optionData.statusName }}
+        {{
+          optionData.abnormalNum > 0
+            ? optionData.abnormalNum + "个异常"
+            : "全部正常"
+        }}
       </p>
     </div>
   </div>
@@ -28,14 +34,38 @@ export default {
       default: () => {},
     },
     activeId: {
-      type: String,
-      default: "temperature",
+      type: Number,
+      default: 0,
     },
   },
   data: () => ({}),
   methods: {
     getMenuImage() {
-      let srcUrl = require(`@/assets/icons/${this.optionData.id}.png`);
+      let classname = "temperature";
+      switch (this.optionData.hardwareType) {
+        case 0:
+          classname = "temperature";
+          break;
+        case 1:
+          classname = "oxygen";
+          break;
+        case 2:
+          classname = "humidity";
+          break;
+        case 3:
+          classname = "dust";
+          break;
+        case 4:
+          classname = "hydrogen";
+          break;
+        case 5:
+          classname = "flame";
+          break;
+        default:
+          classname = "temperature";
+          break;
+      }
+      let srcUrl = require(`@/assets/icons/${classname}.png`);
       return srcUrl;
     },
     changeOptionHandle() {

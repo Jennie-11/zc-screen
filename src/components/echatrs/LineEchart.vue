@@ -41,9 +41,6 @@ export default {
             color: "#e0e6f1",
           },
         },
-        // dataZoom: {
-        //   // show: false,
-        // },
         xAxis: {
           type: "category",
           boundaryGap: false,

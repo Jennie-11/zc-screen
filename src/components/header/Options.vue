@@ -37,7 +37,7 @@ export default {
   }),
   methods: {
     changeOptionHandle(item) {
-      if (this.activeId == item.id) return;
+      if (this.activeId == item.hardwareType) return;
       this.activeId = item.id;
     },
   },
