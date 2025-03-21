@@ -18,22 +18,28 @@ export default {
   methods: {
     initChartHandle() {
       var option;
+      let that = this;
       option = {
         grid: {
           left: "1%",
-          right: "1%",
+          right: "4%",
           bottom: "3%",
+          top: "8%",
           containLabel: true,
         },
         title: {
-          subtext: "单位：%RH",
+          subtext: `单位：${that.echatrsData.unit}`,
+
+          subtextStyle: {
+            fontSize: 18 * this.containerHeight,
+          },
         },
         legend: {
-          data: ["Test"],
+          // data: [""],
           type: "plain",
           itemHeight: 0,
           itemWidth: 12,
-          padding: [0, 20],
+          padding: [10, 20],
           itemGap: 24,
           selectedMode: false,
           textStyle: {
@@ -72,6 +78,8 @@ export default {
           axisLabel: {
             fontSize: 18 * this.containerHeight, // 全局字号
           },
+          max: that.echatrsData.ymaximumValue * 1,
+          min: that.echatrsData.yminimumValue * 1,
           splitLine: {
             show: false,
           },
@@ -91,7 +99,7 @@ export default {
         ],
         series: [
           {
-            name: "Test",
+            name: this.echatrsData.name,
             data: this.echatrsData.yData,
             type: "line",
             symbol: "none",
@@ -104,29 +112,85 @@ export default {
               data: [
                 {
                   // name: "温度上线",
-                  yAxis: 800,
+                  yAxis: that.echatrsData.dfmMaximumValue * 1,
                   label: {
                     formatter: "{b}",
                     position: "insideMiddle",
+                  },
+                  lineStyle: {
+                    color: "#FF383D",
+                    width: 2,
                   },
                 },
                 {
                   // name: "温度下线",
-                  yAxis: 600,
+                  yAxis: that.echatrsData.dfmMinimumValue * 1,
                   label: {
                     formatter: "{b}",
                     position: "insideMiddle",
                   },
+                  lineStyle: {
+                    color: "#FF383D",
+                    width: 2,
+                  },
+                },
+                {
+                  // name: "温度下线",
+                  show: that.echatrsData.minimumValue != -1,
+                  yAxis: that.echatrsData.minimumValue * 1,
+                  label: {
+                    formatter: "{b}",
+                    position: "insideMiddle",
+                  },
+                  lineStyle: {
+                    color: "#FFAB00",
+                    width: 2,
+                  },
+                },
+                {
+                  // name: "温度下线",
+                  yAxis: that.echatrsData.maximumValue,
+                  show: that.echatrsData.minimumValue != -1,
+                  label: {
+                    formatter: "{b}",
+                    position: "insideMiddle",
+                  },
+                  lineStyle: {
+                    color: "#ff8b39",
+                    width: 2,
+                  },
                 },
               ],
-              lineStyle: {
-                color: "#FF383D",
-                width: 2,
-              },
+
               symbol: "none",
               label: {
                 distance: [20, 8],
               },
+            },
+          },
+          {
+            name: "预警下限",
+            type: "line",
+            color: "#FFAB00",
+            opacity: 1,
+          },
+
+          {
+            name: "DFM上限",
+            type: "line",
+            color: "#E34D59",
+            opacity: 1,
+            lineStyle: {
+              fontSize: 15,
+            },
+          },
+          {
+            name: "DFM下限",
+            type: "line",
+            color: "#E34D59",
+            opacity: 1,
+            lineStyle: {
+              fontSize: 15,
             },
           },
         ],
@@ -140,8 +204,6 @@ export default {
   watch: {
     echatrsData: {
       handler() {
-        console.log("echartData");
-
         this.initChartHandle();
       },
       deep: true,

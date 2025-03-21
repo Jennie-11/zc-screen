@@ -1,20 +1,31 @@
 <template>
   <div class="tabs-box pd-24 bd-dd5-bt fx-sk">
     <el-tabs
+      v-if="tagProps.monitorInfoList"
       v-model="activeName"
       @tab-click="tabsChange"
       type="card"
-      :class="{ 'un-scroll': tagProps.tagList.length < 8 }"
+      :class="{ 'un-scroll': tagProps.monitorInfoList.length < 8 }"
     >
       <el-tab-pane
-        :key="item.name"
-        v-for="item in tagProps.tagList"
-        :name="item.name"
+        :key="item.monitorId"
+        v-for="item in tagProps.monitorInfoList"
+        :name="item.monitorId.toString()"
       >
         <div slot="label">
-          <div class="ft-20 lh-20 cr-3ba mg-bt-8">{{ item.label }}</div>
-          <div class="tab-text lh-20 ft-20 cr-bf0">
-            {{ item.value }}{{ tagProps.unit }}
+          <div class="ft-20 lh-20 cr-3ba mg-bt-8">
+            {{ item.monitorName }}
+          </div>
+          <div
+            class="tab-text lh-20 ft-20 cr-bf0"
+            :class="item.measuringState > 0 ? 'cr-f3d' : ''"
+          >
+            <template v-if="tagProps.hardwareType != 5">
+              {{ item.monitorValue }}{{ tagProps.monitorUnitStr }}
+            </template>
+            <template v-else>
+              {{ item.measuringState > 0 ? "异常" : "正常" }}
+            </template>
           </div>
         </div>
       </el-tab-pane>
@@ -31,9 +42,12 @@ export default {
   computed: {},
   mounted() {},
   watch: {
-    "tagProps.tagList": {
+    "tagProps.monitorInfoList": {
       handler(val) {
-        this.activeName = val[0].name;
+        if (!val) {
+          return;
+        }
+        this.activeName = val[0].monitorId.toString();
       },
       immediate: true,
     },
@@ -56,7 +70,7 @@ export default {
   }
   .el-tabs__item {
     padding: 16px;
-    width: 221px;
+    min-width: 221px;
     height: 88px;
     transition: all 0.3s;
     border: 1px solid #ebf1fc;

@@ -1,7 +1,7 @@
 <template>
   <div class="topic-box fx-ag-ct ht-48 pd-lf-16 pd-rt-16">
     <img src="@/assets/icons/arrow_1.png" class="ic-28 fx-sk" />
-    <div class="title ft-24 cr-3ba ff-pz fx-sk mg-lt-12 mg-rt-12">
+    <div class="title ft-22 cr-3ba ff-pz fx-sk mg-lt-12 mg-rt-12">
       {{ title }}
     </div>
     <slot name="titleSolt" :value="11"> </slot>

@@ -8,3 +8,11 @@ export const getShopList = (workshopCode) => {
     },
   });
 };
+
+export const screenData = (data) => {
+  return request({
+    url: "/api/zc-phm-service/phmZcAll/screenData ",
+    method: "post",
+    data,
+  });
+};

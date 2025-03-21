@@ -6,7 +6,7 @@
       :optionList="optionList"
     />
     <OptionInfo
-      :type="tagProps.type"
+      :hardwareType="tagProps.hardwareType"
       :tagProps="tagProps"
       :dataProps="dataProps"
       @tabsChange="tabsChange"
@@ -36,16 +36,16 @@ export default {
           abnormalNum: "0",
           type: "temp",
           unit: "°C",
-          tagList: [
+          monitorInfoList: [
             {
-              name: "temp1",
+              monitorName: "temp1",
               hardwareTypeStr: "温度传感器-01",
               value: "25.48",
               type: "temp",
               status: 1,
             },
             {
-              name: "temp2",
+              monitorName: "temp2",
               hardwareTypeStr: "温度传感器-02",
               value: "51.99",
               type: "temp",
@@ -53,49 +53,49 @@ export default {
             },
 
             {
-              name: "5",
+              monitorName: "5",
               hardwareTypeStr: "温度传感器-05",
               value: "51.99",
               type: "temp",
               status: 2,
             },
             {
-              name: "6",
+              monitorName: "6",
               hardwareTypeStr: "温度传感器-06",
               value: "51.99",
               type: "temp",
               status: 1,
             },
             {
-              name: "7",
+              monitorName: "7",
               hardwareTypeStr: "温度传感器-07",
               value: "51.99",
               type: "temp",
               status: 2,
             },
             {
-              name: "8",
+              monitorName: "8",
               hardwareTypeStr: "温度传感器-08",
               value: "51.99",
               type: "temp",
               status: 1,
             },
             {
-              name: "9",
+              monitorName: "9",
               hardwareTypeStr: "温度传感器-09",
               value: "51.99",
               type: "temp",
               status: 1,
             },
             {
-              name: "10",
+              monitorName: "10",
               hardwareTypeStr: "温度传感器-10",
               value: "51.99",
               type: "temp",
               status: 1,
             },
             {
-              name: "11",
+              monitorName: "11",
               hardwareTypeStr: "温度传感器-11",
               value: "51.99",
               type: "temp",
@@ -110,16 +110,16 @@ export default {
           abnormalNum: "0",
           unit: "%RH",
           type: "humidity",
-          tagList: [
+          monitorInfoList: [
             {
-              name: "humidity1",
+              monitorName: "humidity1",
               hardwareTypeStr: "湿度传感器-01",
               value: "65.48",
               type: "humidity",
               status: 1,
             },
             {
-              name: "humidity2",
+              monitorName: "humidity2",
               hardwareTypeStr: "湿度传感器-02",
               value: "51.99",
               type: "humidity",
@@ -134,16 +134,16 @@ export default {
           abnormalNum: "3",
           unit: "%",
           type: "oxygen",
-          tagList: [
+          monitorInfoList: [
             {
-              name: "oxygen1",
+              monitorName: "oxygen1",
               hardwareTypeStr: "氧气传感器-01",
               value: "65.48",
               type: "oxygen",
               status: 1,
             },
             {
-              name: "oxygen2",
+              monitorName: "oxygen2",
               hardwareTypeStr: "氧气传感器-02",
               value: "51.99",
               type: "oxygen",
@@ -158,16 +158,16 @@ export default {
           abnormalNum: "3",
           unit: "%",
           type: "hydrogen",
-          tagList: [
+          monitorInfoList: [
             {
-              name: "hydrogen1",
+              monitorName: "hydrogen1",
               hardwareTypeStr: "氢气传感器-01",
               value: "65.48",
               type: "hydrogen",
               status: 1,
             },
             {
-              name: "hydrogen2",
+              monitorName: "hydrogen2",
               hardwareTypeStr: "氢气传感器-02",
               value: "51.99",
               type: "hydrogen",
@@ -182,16 +182,16 @@ export default {
           abnormalNum: "1",
           unit: undefined,
           type: "flame",
-          tagList: [
+          monitorInfoList: [
             {
-              name: "flame1",
+              monitorName: "flame1",
               hardwareTypeStr: "火焰传感器-01",
               value: "正常",
               type: "flame",
               status: 1,
             },
             {
-              name: "4",
+              monitorName: "4",
               hardwareTypeStr: "火焰传感器-02",
               value: "异常",
               type: "flame",
@@ -206,16 +206,16 @@ export default {
           abnormalNum: "0",
           unit: "mg/m³",
           type: "dust",
-          tagList: [
+          monitorInfoList: [
             {
-              name: "dust1",
+              monitorName: "dust1",
               hardwareTypeStr: "氢气传感器-01",
               value: "65.48",
               type: "dust",
               status: 1,
             },
             {
-              name: "dust2",
+              monitorName: "dust2",
               hardwareTypeStr: "氢气传感器-02",
               value: "51.99",
               type: "dust",
@@ -224,7 +224,7 @@ export default {
           ],
         },
       ],
-      tagList: [],
+      monitorInfoList: [],
       dataProps: {},
       tagProps: {},
       defaultProps: {},
@@ -267,16 +267,17 @@ export default {
       },
     };
   },
-  created() {
-    this.tagProps = this.optionList[0];
-    this.tabsChange("temp1");
-  },
+  created() {},
   mounted() {
     this.getShopListHandle();
   },
   methods: {
     tabsChange(val) {
-      this.dataProps = this.$findByProperty(this.tagProps.tagList, "name", val);
+      this.dataProps = this.$findByProperty(
+        this.tagProps.monitorInfoList,
+        "monitorId",
+        val * 1
+      );
     },
     changeOptionHandle(val) {
       if (this.currentActiveId == val.hardwareType) return;
@@ -286,12 +287,13 @@ export default {
         "hardwareType",
         val.hardwareType
       );
-      this.tabsChange(this.tagProps.tagList[0].name);
+      this.dataProps = this.tagProps.monitorInfoList[0];
     },
     async getShopListHandle() {
       const { data } = await getShopList("4D5F");
       this.optionList = data.data;
-      console.log(data, ">>>>>>>>>>>>>>>>>");
+      this.tagProps = this.optionList[0];
+      this.dataProps = this.tagProps.monitorInfoList[0];
     },
   },
 };

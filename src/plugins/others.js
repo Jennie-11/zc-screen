@@ -8,7 +8,7 @@ import { findByProperty } from "@/utils/util";
 // import { exportHandle } from "@/utils/export.js";
 // import "@/utils/browserPatch";
 Vue.prototype.$validateData = validateData;
-Date.prototype.format = format;
+Vue.prototype.$dateformat = format;
 
 Vue.prototype.$findByProperty = findByProperty;
 // Vue.prototype.$exportHandle = exportHandle;

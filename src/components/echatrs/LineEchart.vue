@@ -8,6 +8,7 @@ import * as echarts from "echarts";
 
 export default {
   name: "LineEcharts",
+  props: ["echatrsData"],
   data: () => ({
     echartObject: null,
     chartDom: null,
@@ -44,22 +45,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: [
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-          ],
+          data: this.echatrsData.xData,
           axisLabel: {
             type: "time",
             onZero: false,
@@ -70,8 +56,7 @@ export default {
         },
         yAxis: {
           type: "value",
-          max: 8,
-          // name: "y",
+
           axisLabel: {
             show: false,
             fontSize: 18 * this.containerHeight, // 全局字号
@@ -83,12 +68,19 @@ export default {
         },
         tooltip: {
           trigger: "axis",
+          formatter: (params) => {
+            return `${params[0].axisValue}:</br>
+            <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:${
+              params[0].value == 8 ? "#00BF60" : "#FF383D"
+            }"></span>
+            ${params[0].value == 8 ? " 正常" : " 异常"}`;
+          },
         },
 
         series: [
           {
             name: "火焰传感器",
-            data: [5, 5, 8, 8, 5, 5, 8, 5, 5, 8, 8, 5, 5, 8],
+            data: this.echatrsData.yData,
             markLine: {
               emphasis: {
                 disabled: true,
@@ -152,6 +144,14 @@ export default {
       this.clientHeightFun();
       this.initChartHandle();
     });
+  },
+  watch: {
+    echatrsData: {
+      handler() {
+        this.initChartHandle();
+      },
+      deep: true,
+    },
   },
 };
 </script>

@@ -21,7 +21,6 @@ export default {
 
   methods: {
     initChartHandle() {
-      this.echartObject = echarts.init(this.chartDom);
       const containerHeight = this.containerHeight;
 
       let that = this;
@@ -38,14 +37,15 @@ export default {
             splitNumber: 10,
             data: [
               {
-                value: this.dataProps.value * 1,
+                value: that.dataProps.monitorValue * 1,
               },
             ],
             progress: {
               show: true,
               width: 30 * containerHeight,
               itemStyle: {
-                color: "#00BF60",
+                color:
+                  that.dataProps.measuringState > 0 ? "#ff383d" : "#00bf60",
               },
             },
             pointer: {
@@ -95,22 +95,27 @@ export default {
               lineHeight: 48 * containerHeight,
               fontFamily: "TenXun",
               formatter: function (value) {
-                return `{value|${value}${that.unit}}\n{stateName|数值正常}\n{tip|温度传感器-01}`;
+                return `{value|${value}${that.unit}}\n{stateName|数值${
+                  that.dataProps.measuringState > 0 ? "异常" : "正常"
+                }}\n{tip|${that.dataProps.monitorName}}`;
               },
               rich: {
                 value: {
-                  color: "#00bf60",
+                  color:
+                    that.dataProps.measuringState > 0 ? "#ff383d" : "#00bf60",
                   fontSize: 48 * containerHeight,
                   fontFamily: "TenXun",
                   lineHeight: 60 * containerHeight,
                 },
                 stateName: {
-                  color: "#00bf60",
+                  color:
+                    that.dataProps.measuringState > 0 ? "#FF383D" : "#00bf60",
                   fontSize: 32 * containerHeight,
                   fontFamily: "TenXun",
                 },
                 tip: {
-                  color: "#030B1A",
+                  color:
+                    that.dataProps.measuringState > 0 ? "#FF383D" : "#00bf60",
                   fontSize: 23 * containerHeight,
                 },
               },
@@ -162,7 +167,7 @@ export default {
   },
   mounted() {
     this.chartDom = document.getElementById("gaugeChart");
-
+    this.echartObject = echarts.init(this.chartDom);
     window.addEventListener("resize", () => {
       this.clientHeightFun();
       this.initChartHandle();
@@ -175,10 +180,12 @@ export default {
   },
   watch: {
     dataProps: {
-      handler(val) {
-        this.option.series[0].data[0].value = val.value;
+      handler() {
+        console.log(this.dataProps, "dataProps");
+        // this.option.series[0].data[0].value = val.monitorValue;
+        this.initChartHandle();
         // this.option.
-        this.echartObject.setOption(this.option);
+        // this.echartObject.setOption(this.option);
       },
     },
   },
