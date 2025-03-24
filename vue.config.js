@@ -4,7 +4,7 @@ const resolve = (dir) => path.join(__dirname, dir);
 
 module.exports = defineConfig({
   // //路径前缀
-  publicPath: "/mes",
+  publicPath: "/zc-screen",
   // publicPath: "/link",
   assetsDir: "assets",
   transpileDependencies: true,
