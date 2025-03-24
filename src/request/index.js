@@ -17,6 +17,7 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { debounce } from "lodash-es";
 import context from "../main";
+import { isRefreshRequest, refreshToken } from "./ck_token";
 
 let LoadingRequestCount = 0;
 const showLoading = () => {
@@ -84,15 +85,31 @@ axios.interceptors.request.use(
 
 //http response 拦截
 axios.interceptors.response.use(
-  (res) => {
+  async (res) => {
     if (res.config.isShowLoading !== false) hideLoading();
     NProgress.done();
     const status = res.data.code || res.status;
     const statusWhiteList = website.statusWhiteList || [];
     const message = res.data.msg || res.data.error_description || "服务器异常";
     if (statusWhiteList.includes(status)) return Promise.reject(res);
-    if (status == 401)
-      store.dispatch("FedLogOut").then(() => router.push({ path: "/login" }));
+    if (status == 401) {
+      if (!store.state.token) {
+        store.dispatch("FedLogOut").then(() => router.push({ path: "/login" }));
+        return;
+      }
+      if (!isRefreshRequest(res.config.params)) {
+        const cpFlag = await refreshToken();
+        console.log(cpFlag, "cpFlagcpFlag");
+        if (cpFlag) {
+          let token = getStore({ name: "token" });
+          res.config.headers["Blade-Auth"] = "Bearer " + token;
+          const resp = await axios.request(res.config);
+          return resp;
+        }
+        return;
+      }
+    }
+
     if (status != 200) {
       Message({
         message: message,
@@ -103,7 +120,7 @@ axios.interceptors.response.use(
     }
     return res;
   },
-  (error) => {
+  async (error) => {
     if (error.config.isShowLoading !== false) hideLoading();
     NProgress.done();
     console.log(error, "error");
@@ -130,9 +147,26 @@ axios.interceptors.response.use(
       error.response.data.msg ||
       error.response.data.error_description ||
       "服务器异常";
+
     if (statusWhiteList.includes(status)) return Promise.reject(error.response);
-    if (status == 401)
-      store.dispatch("FedLogOut").then(() => router.push({ path: "/login" }));
+    if (status == 401) {
+     
+      if (!store.state.token) {
+        store.dispatch("FedLogOut").then(() => router.push({ path: "/login" }));
+        return
+      }
+      let config = error.response.config;
+      if (!isRefreshRequest(config.params)) {
+        const cpFlag = await refreshToken();
+        if (cpFlag) {
+          let token = JSON.parse(localStorage.getItem("phm-token"));
+          config.headers["Blade-Auth"] = "Bearer " + token.phmtoken;
+          const resp = await axios.request(config);
+          return resp;
+        }
+        return;
+      }
+    }
 
     if (status != 200) {
       Message({
