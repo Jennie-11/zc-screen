@@ -112,7 +112,10 @@ export default {
               data: [
                 {
                   // name: "温度上线",
-                  yAxis: that.echatrsData.dfmMaximumValue * 1,
+                  yAxis:
+                    that.echatrsData.dfmMaximumValue * 1 != -1
+                      ? that.echatrsData.dfmMaximumValue * 1
+                      : "",
                   label: {
                     formatter: "{b}",
                     position: "insideMiddle",
@@ -124,7 +127,10 @@ export default {
                 },
                 {
                   // name: "温度下线",
-                  yAxis: that.echatrsData.dfmMinimumValue * 1,
+                  yAxis:
+                    that.echatrsData.dfmMinimumValue * 1 != -1
+                      ? that.echatrsData.dfmMinimumValue * 1
+                      : "",
                   label: {
                     formatter: "{b}",
                     position: "insideMiddle",
@@ -136,8 +142,11 @@ export default {
                 },
                 {
                   // name: "温度下线",
-                  show: that.echatrsData.minimumValue != -1,
-                  yAxis: that.echatrsData.minimumValue * 1,
+
+                  yAxis:
+                    that.echatrsData.minimumValue * 1 != -1
+                      ? that.echatrsData.minimumValue * 1
+                      : "",
                   label: {
                     formatter: "{b}",
                     position: "insideMiddle",
@@ -149,8 +158,11 @@ export default {
                 },
                 {
                   // name: "温度下线",
-                  yAxis: that.echatrsData.maximumValue,
-                  show: that.echatrsData.minimumValue != -1,
+                  yAxis:
+                    that.echatrsData.maximumValue != -1
+                      ? that.echatrsData.maximumValue
+                      : "",
+
                   label: {
                     formatter: "{b}",
                     position: "insideMiddle",
@@ -169,15 +181,16 @@ export default {
             },
           },
           {
-            name: "预警下限",
+            name: that.echatrsData.minimumValue * 1 != -1 ? "预警下限" : "",
             type: "line",
             color: "#FFAB00",
             opacity: 1,
           },
 
           {
-            name: "DFM上限",
+            name: that.echatrsData.dfmMaximumValue * 1 != -1 ? "DFM上限" : "",
             type: "line",
+            show: false,
             color: "#E34D59",
             opacity: 1,
             lineStyle: {
@@ -185,7 +198,7 @@ export default {
             },
           },
           {
-            name: "DFM下限",
+            name: that.echatrsData.dfmMinimumValue * 1 != -1 ? "DFM下限" : "",
             type: "line",
             color: "#E34D59",
             opacity: 1,

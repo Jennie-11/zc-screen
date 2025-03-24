@@ -21,7 +21,7 @@
             :class="item.measuringState > 0 ? 'cr-f3d' : ''"
           >
             <template v-if="tagProps.hardwareType != 5">
-              {{ item.monitorValue }}{{ tagProps.monitorUnitStr }}
+              {{ item.monitorValue || "-" }}{{ tagProps.monitorUnitStr }}
             </template>
             <template v-else>
               {{ item.measuringState > 0 ? "异常" : "正常" }}
