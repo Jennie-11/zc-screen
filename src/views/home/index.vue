@@ -265,12 +265,11 @@ export default {
           1330, 1320,
         ],
       },
+      workshopCode: "4D5F",
     };
   },
   created() {},
-  mounted() {
-    this.getShopListHandle();
-  },
+  mounted() {},
   methods: {
     tabsChange(val) {
       this.dataProps = this.$findByProperty(
@@ -290,10 +289,24 @@ export default {
       this.dataProps = this.tagProps.monitorInfoList[0];
     },
     async getShopListHandle() {
-      const { data } = await getShopList("4D5F");
+      const { data } = await getShopList(this.workshopCode);
       this.optionList = data.data;
       this.tagProps = this.optionList[0];
       this.dataProps = this.tagProps.monitorInfoList[0];
+    },
+  },
+  watch: {
+    "$route.params.floor": {
+      handler(newval) {
+        newval.toUpperCase();
+        let floor = newval.replace(/[a-z]/g, function (match) {
+          return String.fromCharCode(match.charCodeAt(0) - 32);
+        });
+        this.workshopCode = floor;
+        this.getShopListHandle();
+      },
+      deep: true,
+      immediate: true,
     },
   },
 };
