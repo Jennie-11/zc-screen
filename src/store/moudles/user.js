@@ -14,6 +14,10 @@ const user = {
       state.token = token;
       setStore({ name: "token", content: state.token });
     },
+    SET_SELECTTIME: (state, selectTime) => {
+      state.selectTime = selectTime;
+      setStore({ name: "selectTime", content: state.selectTime });
+    },
     SET_REFRESH_TOKEN: (state, refreshToken) => {
       state.refreshToken = refreshToken;
       setStore({ name: "refreshToken", content: state.refreshToken });

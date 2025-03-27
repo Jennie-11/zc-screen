@@ -11,6 +11,7 @@
       :dataProps="dataProps"
       @tabsChange="tabsChange"
       :echatrsData="echatrsData"
+      @selectTimeChange="selectTimeChange"
     />
   </div>
 </template>
@@ -265,7 +266,9 @@ export default {
           1330, 1320,
         ],
       },
-      workshopCode: "4D5F",
+      dataParams: {
+        workshopCode: "4D5F",
+      },
     };
   },
   created() {},
@@ -278,6 +281,11 @@ export default {
         val * 1
       );
     },
+    selectTimeChange(startTime, endTime) {
+      this.dataParams.startTime = startTime;
+      this.dataParams.endTime = endTime;
+      this.getShopListHandle();
+    },
     changeOptionHandle(val) {
       if (this.currentActiveId == val.hardwareType) return;
       this.currentActiveId = val.hardwareType;
@@ -289,7 +297,7 @@ export default {
       this.dataProps = this.tagProps.monitorInfoList[0];
     },
     async getShopListHandle() {
-      const { data } = await getShopList(this.workshopCode);
+      const { data } = await getShopList(this.dataParams);
       this.optionList = data.data;
       this.tagProps = this.optionList[0];
       this.dataProps = this.tagProps.monitorInfoList[0];
@@ -302,7 +310,7 @@ export default {
         let floor = newval.replace(/[a-z]/g, function (match) {
           return String.fromCharCode(match.charCodeAt(0) - 32);
         });
-        this.workshopCode = floor;
+        this.dataParams.workshopCode = floor;
         this.getShopListHandle();
       },
       deep: true,

@@ -138,6 +138,7 @@ export default {
     },
     selectTimeChange() {
       this.getScreenData();
+      this.$emit("selectTimeChange", this.selectTime[0], this.selectTime[1]);
     },
     defultTime() {
       let date = new Date();
@@ -164,6 +165,7 @@ export default {
         ];
       }
       this.getScreenData();
+      this.$emit("selectTimeChange", this.selectTime[0], this.selectTime[1]);
     },
   },
   watch: {

@@ -92,7 +92,7 @@ export default {
             type: "inside",
             show: false,
             realtime: true,
-            startValue: 2,
+            startValue: 0,
             endValue: 100,
             xAxisIndex: [0, 1],
           },
